@@ -1,12 +1,17 @@
 import React from 'react';
-import { SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, useColorScheme, View, } from 'react-native';
+import { Text, View } from 'react-native';
 
 
 const App = () => {
 
 
   return (
-    <Text>Hola Mundo</Text>
+    <View style={{ backgroundColor: 'red', height: '100%' }}>
+      <Text style={{ fontSize: 50, color: 'white', alignSelf: 'center', marginTop: '100%'}}>
+        Hola Mundo
+
+      </Text>
+    </View>
   );
 };
 
