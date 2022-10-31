@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Pressable, Modal } from 'react-native';
-
+import Formulario from './src/components/Formulario';
 
 const App = () => {
+
+  const [ modalVisible, setModalVisible ] = useState(false)
 
   const nuevaCitaHandler = () => {
     console.log('Hiciste clic')
@@ -19,7 +21,7 @@ const App = () => {
       
       <Pressable
       style={styles.btnNuevaCita}
-      onPress={nuevaCitaHandler}
+      onPress={()=> setModalVisible(true)}
       >
         <Text
         style={styles.btnTextNuevaCita}
@@ -28,14 +30,10 @@ const App = () => {
         </Text>
       </Pressable>
 
-      <Modal
-      animationType='slide'
-      visible={false}
-      >
-        <Text>
-          Desde modal
-        </Text>
-      </Modal>
+      <Formulario 
+      modalVisible={modalVisible}
+      />
+      
 
     </View>
   );
