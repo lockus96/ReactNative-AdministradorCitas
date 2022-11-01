@@ -22,6 +22,7 @@ export default function Formulario({modalVisible, setModalVisible, pacientes, se
           }
 
           const nuevoPaciente = {
+               id: Date.now(),
                paciente,
                propietario,
                email,
@@ -31,7 +32,14 @@ export default function Formulario({modalVisible, setModalVisible, pacientes, se
           }
 
           setPacientes([...pacientes, nuevoPaciente])
-          console.log(pacientes)
+          setModalVisible(!modalVisible)
+
+          setPaciente('')
+          setPropietario('')
+          setEmail('')
+          setTelefono('')
+          setFecha(new Date())
+          setSintomas('')
      }
 
 
