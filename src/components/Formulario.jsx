@@ -3,10 +3,10 @@ import { Modal, Text, StyleSheet, View, TextInput, ScrollView, Pressable, Alert,
 import DatePicker from 'react-native-date-picker'
 
 export default function Formulario({
+     modalVisible,
+     cerrarModal,
      setPaciente: setPacienteApp, 
      paciente: pacienteObj, 
-     modalVisible, 
-     setModalVisible, 
      pacientes, 
      setPacientes}
 ){
@@ -71,7 +71,7 @@ export default function Formulario({
           }
 
 
-          setModalVisible(!modalVisible)
+          cerrarModal()
           setId('')
           setPaciente('')
           setPropietario('')
@@ -93,14 +93,13 @@ export default function Formulario({
           >
                <ScrollView>
                <Text style={styles.titulo}>
-               Nueva Cita
+               {pacienteObj.id ? 'Editar' : 'Nueva'} Cita
                </Text>
 
                <Pressable
                style={styles.btnCancelar}
-               onLongPress={()=> {
-                    setModalVisible(!modalVisible)
-
+               onPress={()=> {
+                    cerrarModal()
                     setPacienteApp({})
                     setId('')
                     setPaciente('')
@@ -238,7 +237,7 @@ export default function Formulario({
                     <Text
                     style={styles.btnCancelarText}
                     >
-                         Confirmar
+                         {pacienteObj.id ? 'Editar' : 'Confirmar'}
                     </Text>
                </Pressable>
 

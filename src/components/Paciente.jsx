@@ -1,23 +1,29 @@
 import React from 'react'
 import { Text, View, StyleSheet, Pressable } from 'react-native'
+import { formatearFecha } from '../helpers'
 
-export default function Paciente({item, setModalVisible, pacienteEditar}) {
+export default function Paciente({
+     setModalPaciente, 
+     pacienteEliminar, 
+     item, 
+     setModalVisible, 
+     pacienteEditar,
+     setPaciente
+}){
      
      const { paciente, fecha, id  } = item
-     const formatearFecha = (fecha) =>{
-          const nuevaFecha = new Date(fecha)
-          const opciones = {
-               weekday: 'long',
-               year: 'numeric',
-               month: 'long',
-               day: 'numeric'
-          }
-
-          return nuevaFecha.toLocaleDateString('es-ES', opciones)
-     }
+    
 
 
      return (
+
+     <Pressable
+     onLongPress={()=> {
+          setModalPaciente(true)
+          setPaciente(item)
+     }}
+     >
+
      <View style={styles.contenedor}>
                <Text style={styles.label}>
                     Paciente:
@@ -32,7 +38,7 @@ export default function Paciente({item, setModalVisible, pacienteEditar}) {
                <View style={styles.contenedorBotones}>
                     <Pressable 
                     style={[styles.btn, styles.btnEditar]}
-                    onLongPress={()=> {
+                    onPress={()=> {
                          pacienteEditar(id)
                          setModalVisible(true)}
                     }
@@ -42,13 +48,19 @@ export default function Paciente({item, setModalVisible, pacienteEditar}) {
                          </Text>
                     </Pressable>
 
-                    <Pressable style={[styles.btn, styles.btnEliminar]}>
+                    <Pressable 
+                    style={[styles.btn, styles.btnEliminar]}
+                    onPress={()=>{
+                         pacienteEliminar(id)
+                    }}
+                    >
                          <Text style={styles.btnTexto}>
                               Eliminar
                          </Text>
                     </Pressable>
                </View>
      </View>
+     </Pressable>
      )
 }
 
