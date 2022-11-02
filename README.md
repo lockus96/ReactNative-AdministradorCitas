@@ -1,6 +1,6 @@
 ### React Native - Administrador de Pacientes
 
-![img1](https://i.imgur.com/DrG5Cnz.jpg)
+![img1](https://i.imgur.com/DrG5Cnz.jpg =250x250)
 
 ![img2](https://i.imgur.com/wAloxyX.jpg)
 
