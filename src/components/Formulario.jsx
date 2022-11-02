@@ -20,7 +20,8 @@ export default function Formulario({
      const [ sintomas, setSintomas] = useState('')
 
      useEffect(()=>{
-          if(Object.keys(pacienteObj).length > 0){
+
+          if(Object.keys(pacienteObj).length > 0 ){
 
                setPaciente(pacienteObj.paciente)     
                setId(pacienteObj.id)     
@@ -29,9 +30,9 @@ export default function Formulario({
                setTelefono(pacienteObj.telefono)     
                setFecha(pacienteObj.fecha)     
                setSintomas(pacienteObj.sintomas)  
-
           } 
-     }, [])
+
+     }, [pacienteObj])
 
      const handleCita = () => {
           if([paciente, propietario, email, telefono, fecha, sintomas].includes('')){

@@ -53,11 +53,11 @@ const App = () => {
       }
 
       <Formulario 
-      paciente={paciente}
       modalVisible={modalVisible}
       setModalVisible={setModalVisible}
       pacientes={pacientes}
       setPacientes={setPacientes}
+      paciente={paciente}
       setPaciente={setPaciente}
       />
       
