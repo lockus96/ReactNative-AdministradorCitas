@@ -1,9 +1,9 @@
 import React from 'react'
 import { Text, View, StyleSheet, Pressable } from 'react-native'
 
-export default function Paciente({item}) {
+export default function Paciente({item, setModalVisible, pacienteEditar}) {
      
-     const { paciente, fecha  } = item
+     const { paciente, fecha, id  } = item
      const formatearFecha = (fecha) =>{
           const nuevaFecha = new Date(fecha)
           const opciones = {
@@ -30,7 +30,13 @@ export default function Paciente({item}) {
                </Text>
 
                <View style={styles.contenedorBotones}>
-                    <Pressable style={[styles.btn, styles.btnEditar]}>
+                    <Pressable 
+                    style={[styles.btn, styles.btnEditar]}
+                    onLongPress={()=> {
+                         pacienteEditar(id)
+                         setModalVisible(true)}
+                    }
+                    >
                          <Text style={styles.btnTexto}>
                               Editar
                          </Text>

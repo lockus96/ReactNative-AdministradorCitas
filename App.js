@@ -7,7 +7,12 @@ const App = () => {
 
   const [ modalVisible, setModalVisible ] = useState(false)
   const [ pacientes, setPacientes] = useState([])
+  const [ paciente, setPaciente] = useState({})
 
+  const pacienteEditar = (id) => {
+      const pacienteEditar = pacientes.filter(paciente => paciente.id === id)
+      setPaciente(pacienteEditar[0])
+    }
 
   return (
     <View style={styles.container}>
@@ -38,7 +43,9 @@ const App = () => {
         renderItem={({item})=> {
           return(
             <Paciente 
+            setModalVisible={setModalVisible}
             item={item}
+            pacienteEditar={pacienteEditar}
             />
           )
         }}
@@ -46,10 +53,12 @@ const App = () => {
       }
 
       <Formulario 
+      paciente={paciente}
       modalVisible={modalVisible}
       setModalVisible={setModalVisible}
       pacientes={pacientes}
       setPacientes={setPacientes}
+      setPaciente={setPaciente}
       />
       
 

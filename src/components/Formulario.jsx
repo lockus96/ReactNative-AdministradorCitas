@@ -1,15 +1,37 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Modal, Text, StyleSheet, View, TextInput, ScrollView, Pressable, Alert, ProgressBarAndroidComponent } from 'react-native'
 import DatePicker from 'react-native-date-picker'
 
-export default function Formulario({modalVisible, setModalVisible, pacientes, setPacientes}) {
+export default function Formulario({
+     setPaciente: setPacienteApp, 
+     paciente: pacienteObj, 
+     modalVisible, 
+     setModalVisible, 
+     pacientes, 
+     setPacientes}
+){
 
      const [ paciente, setPaciente] = useState('')
+     const [ id, setId] = useState('')
      const [ propietario, setPropietario] = useState('')
      const [ email, setEmail] = useState('')
      const [ telefono, setTelefono] = useState('')
      const [ fecha, setFecha] = useState(new Date())
      const [ sintomas, setSintomas] = useState('')
+
+     useEffect(()=>{
+          if(Object.keys(pacienteObj).length > 0){
+
+               setPaciente(pacienteObj.paciente)     
+               setId(pacienteObj.id)     
+               setPropietario(pacienteObj.propietario)     
+               setEmail(pacienteObj.email)     
+               setTelefono(pacienteObj.telefono)     
+               setFecha(pacienteObj.fecha)     
+               setSintomas(pacienteObj.sintomas)  
+
+          } 
+     }, [])
 
      const handleCita = () => {
           if([paciente, propietario, email, telefono, fecha, sintomas].includes('')){
@@ -21,8 +43,8 @@ export default function Formulario({modalVisible, setModalVisible, pacientes, se
 
           }
 
+          // Revisar si es un registro nuevo o edición
           const nuevoPaciente = {
-               id: Date.now(),
                paciente,
                propietario,
                email,
@@ -31,9 +53,25 @@ export default function Formulario({modalVisible, setModalVisible, pacientes, se
                sintomas
           }
 
-          setPacientes([...pacientes, nuevoPaciente])
-          setModalVisible(!modalVisible)
+          if(id){
+               // hay un ID, estamos editando
+               nuevoPaciente.id = id
+               const pacientesActualizados = pacientes.map( pacienteState => 
+                    pacienteState.id === nuevoPaciente.id ? nuevoPaciente : 
+                    pacienteState)
 
+               setPacientes(pacientesActualizados)
+               setPacienteApp({})
+
+          } else {
+               // nuevo registro
+               nuevoPaciente.id = Date.now()
+               setPacientes([...pacientes, nuevoPaciente])
+          }
+
+
+          setModalVisible(!modalVisible)
+          setId('')
           setPaciente('')
           setPropietario('')
           setEmail('')
@@ -59,7 +97,18 @@ export default function Formulario({modalVisible, setModalVisible, pacientes, se
 
                <Pressable
                style={styles.btnCancelar}
-               onLongPress={()=>setModalVisible(!modalVisible)}
+               onLongPress={()=> {
+                    setModalVisible(!modalVisible)
+
+                    setPacienteApp({})
+                    setId('')
+                    setPaciente('')
+                    setPropietario('')
+                    setEmail('')
+                    setTelefono('')
+                    setFecha(new Date())
+                    setSintomas('')
+               }}
                >
                     <Text
                     style={styles.btnCancelarText}
