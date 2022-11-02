@@ -13,7 +13,6 @@ export default function Formulario({
 
      const [ paciente, setPaciente] = useState('')
      const [ id, setId] = useState('')
-     const [ propietario, setPropietario] = useState('')
      const [ email, setEmail] = useState('')
      const [ telefono, setTelefono] = useState('')
      const [ fecha, setFecha] = useState(new Date())
@@ -25,7 +24,6 @@ export default function Formulario({
 
                setPaciente(pacienteObj.paciente)     
                setId(pacienteObj.id)     
-               setPropietario(pacienteObj.propietario)     
                setEmail(pacienteObj.email)     
                setTelefono(pacienteObj.telefono)     
                setFecha(pacienteObj.fecha)     
@@ -35,7 +33,7 @@ export default function Formulario({
      }, [pacienteObj])
 
      const handleCita = () => {
-          if([paciente, propietario, email, telefono, fecha, sintomas].includes('')){
+          if([paciente, email, telefono, fecha, sintomas].includes('')){
                Alert.alert(
                     'Error',
                     'Todos los campos son obligatorios',
@@ -47,7 +45,6 @@ export default function Formulario({
           // Revisar si es un registro nuevo o edición
           const nuevoPaciente = {
                paciente,
-               propietario,
                email,
                telefono,
                fecha,
@@ -74,7 +71,6 @@ export default function Formulario({
           cerrarModal()
           setId('')
           setPaciente('')
-          setPropietario('')
           setEmail('')
           setTelefono('')
           setFecha(new Date())
@@ -103,7 +99,6 @@ export default function Formulario({
                     setPacienteApp({})
                     setId('')
                     setPaciente('')
-                    setPropietario('')
                     setEmail('')
                     setTelefono('')
                     setFecha(new Date())
@@ -128,7 +123,7 @@ export default function Formulario({
                          <TextInput 
                               style={styles.input}
                               keyboardType='default'
-                              placeholder='Nombre Paciente'
+                              placeholder='Paciente'
                               placeholderTextColor={'#666'}
                               value={paciente}
                               onChangeText={setPaciente}
@@ -141,31 +136,13 @@ export default function Formulario({
                     <Text
                     style={styles.label}
                     >
-                         Nombre Propietario
-                    </Text>     
-                         <TextInput 
-                              style={styles.input}
-                              keyboardType='default'
-                              placeholder='Nombre Propietario'
-                              placeholderTextColor={'#666'}
-                              value={propietario}
-                              onChangeText={setPropietario}
-                         />
-               </View>
-
-               <View
-               style={styles.campo}
-               >
-                    <Text
-                    style={styles.label}
-                    >
-                         Email Propietario
+                         Email
                     </Text>     
                          <TextInput 
                               style={styles.input}
                               autoCapitalize='none'
                               keyboardType='email-address'
-                              placeholder='Email Propietario'
+                              placeholder='Email'
                               placeholderTextColor={'#666'}
                               value={email}
                               onChangeText={setEmail}
@@ -197,7 +174,7 @@ export default function Formulario({
                     <Text
                     style={styles.label}
                     >
-                         Fecha de Alta
+                         Fecha de Atención
                     </Text>  
                     <View>   
                          <DatePicker 
@@ -280,7 +257,7 @@ const styles = StyleSheet.create({
           borderRadius: 20,
      },
      inputLabel: {
-         height: 50,
+         height: 70,
          
      },
      btnCancelar: {

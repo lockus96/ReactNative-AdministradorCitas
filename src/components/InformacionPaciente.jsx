@@ -5,7 +5,6 @@ import { formatearFecha } from '../helpers'
 
 export default function InformacionPaciente({setPaciente, setModalPaciente, paciente}) {
 
-     console.log(paciente)
 
   return (
      <View 
@@ -20,7 +19,7 @@ export default function InformacionPaciente({setPaciente, setModalPaciente, paci
 
           <View>
                <Pressable
-               onLongPress={()=> {
+               onPress={()=> {
                     setModalPaciente(false)
                     setPaciente({})
                }}
@@ -40,10 +39,6 @@ export default function InformacionPaciente({setPaciente, setModalPaciente, paci
                <View style={styles.campo}>
                     <Text style={styles.label}> Nombre: </Text>
                     <Text style={styles.valor}> {paciente.paciente} </Text>
-               </View>
-               <View style={styles.campo}>
-                    <Text style={styles.label}> Propietario: </Text>
-                    <Text style={styles.valor}> {paciente.propietario} </Text>
                </View>
                <View style={styles.campo}>
                     <Text style={styles.label}> Email: </Text>

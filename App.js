@@ -143,6 +143,7 @@ const styles = StyleSheet.create({
   listado: {
     marginTop: 50,
     marginHorizontal: 40,
+    
   }
   
 })
